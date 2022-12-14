@@ -1,0 +1,39 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/Inc16.hdl
+
+/**
+ * 16-bit incrementer:
+ * out = in + 1 (arithmetic addition)
+ */
+
+CHIP Inc16 {
+    IN in[16];
+    OUT out[16];
+
+    PARTS:
+
+    Not(in=in[0], out=not-0);
+    Or(a=in[0], b=not-0, out=true);  // p ∨ ¬p
+    And(a=in[0], b=not-0, out=false); // p ∧ ¬p
+
+    HalfAdder(a=in[0], b=true, sum=out[0], carry=carry-0);
+    FullAdder(a=in[1], b=false, c=carry-0, sum=out[1], carry=carry-1);
+    FullAdder(a=in[2], b=false, c=carry-1, sum=out[2], carry=carry-2);
+    FullAdder(a=in[3], b=false, c=carry-2, sum=out[3], carry=carry-3);
+    FullAdder(a=in[4], b=false, c=carry-3, sum=out[4], carry=carry-4);
+    FullAdder(a=in[5], b=false, c=carry-4, sum=out[5], carry=carry-5);
+    FullAdder(a=in[6], b=false, c=carry-5, sum=out[6], carry=carry-6);
+    FullAdder(a=in[7], b=false, c=carry-6, sum=out[7], carry=carry-7);
+    FullAdder(a=in[8], b=false, c=carry-7, sum=out[8], carry=carry-8);
+    FullAdder(a=in[9], b=false, c=carry-8, sum=out[9], carry=carry-9);
+    FullAdder(a=in[10], b=false, c=carry-9, sum=out[10], carry=carry-10);
+    FullAdder(a=in[11], b=false, c=carry-10, sum=out[11], carry=carry-11);
+    FullAdder(a=in[12], b=false, c=carry-11, sum=out[12], carry=carry-12);
+    FullAdder(a=in[13], b=false, c=carry-12, sum=out[13], carry=carry-13);
+    FullAdder(a=in[14], b=false, c=carry-13, sum=out[14], carry=carry-14);
+
+    Xor(a=in[15], b=carry-14, out=out[15]);
+
+}
