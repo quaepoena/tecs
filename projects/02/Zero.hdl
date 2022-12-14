@@ -1,3 +1,7 @@
+/**
+ * Return 0.
+ */
+
 CHIP Zero {
     IN
 	in;
